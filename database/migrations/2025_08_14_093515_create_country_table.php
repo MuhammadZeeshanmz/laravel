@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('country', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $table->json('state_ids')->nullable();
+            $table->foreignId('id')->constrained('state')->onDelete('cascade');
+            
+
+            // $table->timestamps();
         });
     }
 
