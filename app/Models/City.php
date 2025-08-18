@@ -8,8 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
-    protected $table = 'cities';
+    protected $table = 'citys';
     protected $fillable = [
         'name',
+        'state_id',
     ];
+    public function state()
+{
+    return $this->belongsTo(State::class);
 }
+
+
+
+}
+
+// protected $table = 'cities';
+// protected $fillable = [
+//     'name',
+// ];

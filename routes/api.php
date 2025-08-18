@@ -1,13 +1,22 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\StateController;
+
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/country/store', [CountryController::class, 'store']);
 Route::get('/country/show/{id}', [CountryController::class, 'show']);
+Route::put('/country/update/{id}', [CountryController::class, 'update']);
+Route::post('/state/store', [StateController::class, 'store']);
+Route::get('/state/show/{id}', [StateController::class, 'show']);
+Route::post('/city/store', [CityController::class, 'store']);
+Route::get('/city/show/{id}', [CityController::class , 'show']);
+
 
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working']);

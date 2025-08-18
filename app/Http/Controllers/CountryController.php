@@ -15,33 +15,60 @@ class CountryController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validateData = $request->validate([
-                'name' => 'required|string|max:30',
-                'state_ids' => 'array|nullable',
-                'state_ids.*' => 'integer|exists:states,id',
-            ]);
-            $data = Country::create([
-                'name' => $validateData['name'],
-                'state_ids' => isset($validateData['state_ids']) ? json_encode($validateData['state_ids']) : null,
-            ]);
-            return $data;
-        } catch (\Exception $e) {
-            return $e;
-        }
+        $validateData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $data = Country::create([
+            'name' => $validateData['name'],
+        ]);
+
+        
+        return $data;
+        // try {
+        //     $validateData = $request->validate([
+        //         'name' => 'required|string|max:30',
+        //         'state_ids' => 'array|nullable',
+        //         'state_ids.*' => 'integer|exists:states,id',
+        //     ]);
+        //     $data = Country::create([
+        //         'name' => $validateData['name'],
+        //         'state_ids' => isset($validateData['state_ids']) ? json_encode($validateData['state_ids']) : null,
+        //     ]);
+        //     return $data;
+        // } catch (\Exception $e) {
+        //     return $e;
+        // }
+    }
+    public function update(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $data = Country::findOrFail($id);
+        $data->update([
+            'name' => $validateData['name'],
+        ]);
+        return $data;
     }
 
 
     public function show($id)
     {
         try {
-            $country = Country::findOrFail($id);
-             $country->states = $country->states_with_cities;
-             
+            $country = Country::with('states.cities')->findOrFail($id);
 
             return $country;
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Throwable $th) {
+            return $th;
         }
+        // try {
+        //     $country = Country::findOrFail($id);
+        //      $country->states = $country->states_with_cities;
+
+
+        //     return $country;
+        // } catch (\Exception $e) {
+        //     return $e->getMessage();
+        // }
     }
 }

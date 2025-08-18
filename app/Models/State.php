@@ -10,21 +10,41 @@ class State extends Model
 {
     use HasFactory;
 
-    protected $table = 'state';
-    protected $casts = [
-    'city_ids' => 'array',
-];
-
-
+    protected $table = 'states';
 
     protected $fillable = [
-        'name',
-        'city_id'
-
+         'name', 
+         'country_id',
     ];
+    public function country(){
+        return $this->belongsTo(Country::class, 'country_id');
+    }
 
-    public function cities()
-    {
-        return $this->hasMany(City::class, 'id', 'city_id');
+    public function cities(){
+        return $this->hasMany(City::class);
     }
 }
+
+
+
+
+
+
+
+//     protected $table = 'state';
+//     protected $casts = [
+//     'city_ids' => 'array',
+// ];
+
+
+
+//     protected $fillable = [
+//         'name',
+//         'city_id'
+
+//     ];
+
+//     public function cities()
+//     {
+//         return $this->hasMany(City::class, 'id', 'city_id');
+//     }

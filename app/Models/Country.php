@@ -11,38 +11,52 @@ use App\Models\State;
 class Country extends Model
 {
   use HasFactory;
-
-  protected $table = 'country';
-  protected $casts = [
-    'state_ids' => 'array'
-  ];
-
+  protected $table ='countries';
   protected $fillable = [
-    'name',
-    'state_ids'
+    'name'
   ];
+  public function states() {
+    return $this->hasMany(State::class,);
+  }
 
 
-   public function getStatesWithCitiesAttribute()
-    {
-        $states = State::whereIn('id', $this->state_ids ?? [])->get();
 
-        return $states->map(function ($state) {
+
+
+}
+
+
+  // protected $table = 'country';
+//   protected $casts = [
+//     'state_ids' => 'array'
+//   ];
+
+//   protected $fillable = [
+//     'name',
+//     'state_ids'
+//   ];
+
+
+//    public function getStatesWithCitiesAttribute()
+//     {
+//         $states = State::whereIn('id', $this->state_ids ?? [])->get();
+
+//         return $states->map(function ($state) {
           
-            if (!empty($state->city_id)) {
-                $city = City::find($state->city_id);
-                $state->cities = $city ? [$city] : [];
-            }
+//             if (!empty($state->city_id)) {
+//                 $city = City::find($state->city_id);
+//                 $state->cities = $city ? [$city] : [];
+//             }
 
            
-            if (!empty($state->city_ids)) {
-                $state->cities = City::whereIn('id', $state->city_ids)->get();
-            }
+//             if (!empty($state->city_ids)) {
+//                 $state->cities = City::whereIn('id', $state->city_ids)->get();
+//             }
 
-            return $state;
-        });
-    }
-}
+//             return $state;
+//         });
+//     }
+// }
 
   // public function states()
   // {
@@ -57,5 +71,5 @@ class Country extends Model
   //     'id',         // Local key on the countries table...
   //     'id'          // Local key on the states table...
   //   );
-  // }
+  
 
