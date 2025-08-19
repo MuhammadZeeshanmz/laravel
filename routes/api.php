@@ -9,6 +9,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\StateController;
 
 Route::post('/users/login', [UserController::class, 'login']);
+Route::get('/countries', [CountryController::class, 'index']);
 Route::post('/country/store', [CountryController::class, 'store']);
 Route::get('/country/show/{id}', [CountryController::class, 'show']);
 Route::put('/country/update/{id}', [CountryController::class, 'update']);

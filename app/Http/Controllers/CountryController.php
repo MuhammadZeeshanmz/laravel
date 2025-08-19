@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\DB;
 class CountryController extends Controller
 {
     //
-    public function index() {}
+    public function index()
+    {
+        $query = Country::all()->paginate(2);
+        return CountryResource::Collection($query);
+    }
 
     public function store(CoutryRequest $request)
     {
@@ -35,11 +39,10 @@ class CountryController extends Controller
                 }
             };
             DB::commit();
-
             return new CountryResource($data);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(['error' => $th->getMessage()], 500);
+            return $th;
         }
     }
 
@@ -111,12 +114,12 @@ class CountryController extends Controller
         try {
             $country = Country::with('states.cities')->findOrFail($id);
 
-            return $country;
+            return new CountryResource($country);
         } catch (\Throwable $th) {
             return $th;
         }
         // try {
-        //     $country = Country::findOrFail($id);
+        //     $country = Country::findOrFail($id)
         //      $country->states = $country->states_with_cities;
 
 
