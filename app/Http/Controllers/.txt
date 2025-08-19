@@ -150,3 +150,56 @@ public function login(Request $request)
     ], 401);
 }
 
+{
+    "country_name": "Aric",
+    "states": [
+        {
+            "id": 10,
+            "state_name": "324234"
+        },
+        {
+            "id":11,
+            "state_name": "234"
+        },
+        {
+            "id": 12,
+            "state_name": "32434"
+        },
+        
+        {
+            
+            "state_name": "xyz"
+        }
+
+    ]
+}
+{
+    "state_name": "Arsc",
+    "country_id": 1,
+    "cities": [
+        {
+            "id": 2,
+
+            "city_name": "123"
+        },
+        {
+            "id": 3,
+            
+            "city_name": "1234"
+        },
+        {
+            "id": 4,
+
+      
+            "city_name": "ffdfddf"
+        },
+        
+        {
+            "id": 5,
+
+            
+            "city_name": "xfdfyzf"
+        }
+
+    ]
+}

@@ -23,9 +23,9 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
       
-        $validated = $request->validated();
+        // $validated = $request->validated();
 
-        $task = Task::create($validated);
+        $task = Task::create($request);
         $task->assignedUsers()->attach([1 ]);
 
         return response()->json([

@@ -16,6 +16,7 @@ Route::post('/state/store', [StateController::class, 'store']);
 Route::get('/state/show/{id}', [StateController::class, 'show']);
 Route::post('/city/store', [CityController::class, 'store']);
 Route::get('/city/show/{id}', [CityController::class , 'show']);
+Route::put('/state/update/{id}', [StateController::class, 'update']);
 
 
 Route::get('/test', function () {

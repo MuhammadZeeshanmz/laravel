@@ -33,12 +33,12 @@ class CityController extends Controller
     }
 public function show($id){
     try {
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
         $city = City::with('state')->findOrFail($id);
         // $city->state =   $city->state ;
-        // return $city;
-        $queries = DB::getQueryLog();
-        return$queries;
+        return $city;
+        // $queries = DB::getQueryLog();
+        // return$queries;
 
     } catch (\Throwable $th) {
         return $th;
