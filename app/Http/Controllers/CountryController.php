@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CoutryRequest;
+use App\Http\Resources\CountryResource;
 use App\Models\Country;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -34,10 +35,11 @@ class CountryController extends Controller
                 }
             };
             DB::commit();
-            return true;
+
+            return new CountryResource($data);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return false;
+            return response()->json(['error' => $th->getMessage()], 500);
         }
     }
 
